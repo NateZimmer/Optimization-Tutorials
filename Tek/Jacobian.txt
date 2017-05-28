@@ -1,0 +1,5 @@
+\\ \frac{ \partial \hat y}{ \partial \theta_1}  = x^3 \\ 
+\frac{ \partial \hat y}{ \partial \theta_2} = x^2 \\ 
+\frac{ \partial \hat y}{ \partial \theta_3} = x^1 \\ 
+\frac{ \partial \hat y}{ \partial \theta_4} = 1 \\ 
+J = \bigg[ x^3 , x^2, x^1, 1 \bigg] \\

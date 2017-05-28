@@ -1,0 +1,27 @@
+\\
+\begin{bmatrix}
+\dot x_1 \\
+\dot x_2 \\
+\end{bmatrix} =
+
+\begin{bmatrix}
+0 & 1 \\
+-w_o^2 & -2 w_o \zeta
+\end{bmatrix} \cdot 
+
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\end{bmatrix} +
+
+\begin{bmatrix}
+0 \\
+w_o^2
+\end{bmatrix} \cdot u
+
+\\ \\
+
+y = [ 1 \quad 0] \cdot \begin{bmatrix}
+x_1 \\
+x_2 \\
+\end{bmatrix} + 0
