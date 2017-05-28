@@ -46,8 +46,10 @@ So, what is the partial derivative of our model with respect to **_theta1_** ? S
 Now keep in mind, **x** is a **vector**. Which means that **J** is a 2 dimensional  array where we take the partial derivative per sample. If **x** were a variable, the operation we performed above would have been the [**gradient**](https://en.wikipedia.org/wiki/Gradient) as opposed to the Jacobian. So for the above model, the data was for **x = -1.4 to 2.5** in **0.01 increments**. This equates to **_m_** samples being equal to 391. Consequently, our Jacobian is of size **[m,n]** where **m** is the number of samples and **n** is the number of parameters. In this case, **size(J) = [391,4]**. The first 10 rows of J are as follows:
 
 J(1:10 , :) = 
+
+
 | x^3 | x^2 | x^1 | 1 | 
-|---|---|---|---| 
+|----|----|----|----| 
 | -2.7440 |    1.9600 |   -1.4000 |    1.0000 |
 |   -2.6856 |   1.9321  | -1.3900 |   1.0000
 |   -2.6281  |  1.9044  | -1.3800  |  1.0000
