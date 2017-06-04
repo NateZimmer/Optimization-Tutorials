@@ -1,6 +1,8 @@
-# The Second Order System 
+# Recursive Least Squares 
 
-### Transfer Function Form: 
+### Introduction: 
+
+Recursive least squares allows one to learn parameters iteratively. This estimation technique avoids matrix inversion and makes optimal use of a new sample. It is the recursive version of batch least squares.  
 
 Below are the variables and their respective sizes for Recursive Least Squares (RLS).
 
