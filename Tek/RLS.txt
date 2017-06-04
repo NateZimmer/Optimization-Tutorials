@@ -1,0 +1,6 @@
+\\
+P_{n,n} = Covariance \  Matrix \\
+\theta_{n,1} = Learning \ Parameters \\
+x_{1,n} = Inputs \\
+y_{1,1} = Measurement \\ 
+\lambda_{1,1} = Forgetting \ Factor  

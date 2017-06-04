@@ -27,3 +27,5 @@ State space systems can easily be discritized with the following:
 <p align="center">
 <img src ="Images/2ndOrder/discrete.PNG">
 </p>
+
+Where subscript D states for discrete and where subscript C stands for continuous. 
