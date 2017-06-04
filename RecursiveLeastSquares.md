@@ -16,14 +16,12 @@ Where _**n**_ is the number of features / parameters. Notice how _**m**_,traditi
 
 These 2 equations should be performed every time a new measurement is performed. Below is matlab code to implement this algorithm. 
 
-```
-
+```matlab
 % NZ RLS
 function [theta,P] = RLS_Nate(x,y,theta,lambda,P)
 
 P = P/lambda - (P * (x') * x * P)./(lambda + x * P * x')./lambda;
 theta = theta + P*(x')*(y - x * theta);
-
 end
 ```
 
@@ -98,8 +96,7 @@ The covariance matrix demonstrates how your samples change with respect to each 
 
 ## Example 1 Code: 
 
-```
-
+```matlab
 %NZ
 
 x = (-3:0.01:2)'; % This is the time samples 
@@ -149,6 +146,4 @@ ylim([-10,10])
 grid on
 set(gca,'FontSize',10,'FontWeight','bold');
 set(gcf,'Units','Pixels');
-
-
 ```

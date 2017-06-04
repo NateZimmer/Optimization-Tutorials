@@ -73,7 +73,7 @@ Using the normal equation, the J formulated above, and the data, we get the opti
 
 The code to generate this plot, calculate the normal equation, ...ect is shown below and is done in matlab / octave. 
 
-```
+```matlab
 %NZ
 x = (-1.4:0.01:2.5)'; % This is the time samples 
 y = 10*x.^3-20*x.^2-10*x+20; % This is the true model
@@ -152,13 +152,13 @@ Can we only model polynomials? No, least squares can identify optimal parameters
 </p>
 While this represents a highly nonlinear function, it is actually linear with respect to the model. The Jacobian for this function is simply:
 
-```
+```matlab
 J = [sin(log(x))]; % Formulate Jacobian 
 ```
 
 And using the prior code modified for our new model we get: 
 
-```
+```matlab
 x = (-1.4:0.01:2.5)'; % This is the time samples 
 y = 5*sin(log(x)); % This is the true model
 noise = 5*randn(length(x),1); % Noise model 
