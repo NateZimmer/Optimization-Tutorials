@@ -1,4 +1,4 @@
-
+<p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
 
 ## Gradient Descent Tutorial 
 
@@ -132,3 +132,4 @@ title('Gradient Descent')
 
 ```
 
+<p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>

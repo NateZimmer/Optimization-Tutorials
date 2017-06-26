@@ -1,3 +1,4 @@
+<p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
 
 ## Least Squares: 
 
@@ -192,3 +193,4 @@ The Jacobian for this is the following:
 
 Notice how this is something that we have not encountered before where thetas(parameters) themselves ended up in the Jacobian. What this means is that this optimization problem is non-linear with respect to the parameters. It also means that this problem is non-convex and cannot be solved with the normal equation. [**Nonlinear least squares**](https://en.wikipedia.org/wiki/Non-linear_least_squares) can be used to arrive at a solution. However, this solution may not be the optimal solution and it requires an initial guess. This initial guess will drastically effect the results and convergence. 
 
+<p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
