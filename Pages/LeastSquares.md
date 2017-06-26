@@ -24,7 +24,7 @@ Consequently, we wish to choose the optimal thetas such that our error is minimi
 <img src ="Images/LSQ_4.PNG">
 </p>
 
-Where **_theta_** is the vector of our parameters, where **_y_** is our output data, and where **_J_** is the [**Jacobian matrix**](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant).
+Where **_theta_** is the vector of our parameters, where **_y_** is our output data, and where **_J_** is the [**Jacobian matrix**](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant). I have a derivation of the normal equation at the following link: [**Normal Equation Proof**](NormalEquationProof.ipynb). I would reccomend atleast glancing at it for it provides intuition as to where this math originates from. 
 
 ### Understanding the Jacobian
 
