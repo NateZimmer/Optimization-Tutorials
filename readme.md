@@ -10,5 +10,6 @@ The following is my personal reference repository of math examples and concepts 
 1. [**Least Squares**](Pages/LeastSquares.md)
 2. [**Kalman Filter**](Pages/KalmanFilter.md)
 3. [**Recursive Least Squares**](Pages/RecursiveLeastSquares.md) 
-4. [**Gradient Descent**](Pages/GradientDescent.md) 
+4. [**Gauss Newton**](Pages/GaussNewton.ipynb) 
+5. [**Gradient Descent**](Pages/GradientDescent.md) 
 
