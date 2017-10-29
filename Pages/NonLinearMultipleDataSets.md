@@ -29,7 +29,7 @@ function r =subR(v,rFnc,theta)
     end
 end
 ```
-Next, modify a finite difference Jacobian to except this addition 
+Next, modify a finite difference Jacobian for the modified residual function.
 
 ```matlab
 function J=jacB(v,fnc,params)
@@ -47,7 +47,7 @@ end
 end
 ```
 
-Finally, modify the vanilla levenberg marquardt function to use both the modified r & J functions. 
+Finally, modify the vanilla Levenberg Marquardt function to use both the modified r & J functions. 
 
 ```matlab 
 function theta = lmaB(v,fnc,params)
@@ -76,7 +76,7 @@ end
 
 ```
 
-We now have a non-linear least squares solver that can accept multiple data sets. As a crappy example, lets identify a line: 
+We now have a non-linear least squares solver that can utilize multiple data sets. As a crappy example, lets identify a line: 
 
 <p align='center'><img src='Images/lmaB1.png'</p>
 

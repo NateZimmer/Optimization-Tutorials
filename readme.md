@@ -12,6 +12,6 @@ The following is my personal reference repository of math examples and concepts 
 4. [**Recursive Least Squares**](Pages/RecursiveLeastSquares.md) 
 5. [**Gauss Newton**](Pages/GaussNewton.ipynb) 
 6. [**Gradient Descent**](Pages/GradientDescent.md) 
-. [**NLSQ With Multiple Datasets**](Pages/NonLinearMultipleDataSets.md) 
+7. [**NLSQ With Multiple Datasets**](Pages/NonLinearMultipleDataSets.md) 
 
 
