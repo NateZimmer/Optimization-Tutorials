@@ -1,9 +1,9 @@
 # Signal Reconstruction by Time Stamp
-Data logging applications are easy to code though unfortunately they are also one of the easiest programs to mess up. Small sampling error can accumulate and destroy the accuracy of estimation. Consequently, one must take due diligence in the collection of data as well as the as the reconstruction. Consequently, the following is my recommendation for data collection and reconstruction in the case. 
+Data logging applications are easy to code though unfortunately they are also one of the easiest programs to mess up. Small sampling error can accumulate and destroy the accuracy of estimation if not accounted for. Consequently, one must take due diligence in the collection of data as well as the as the reconstruction. If data is timestamped, a significant amount of issues can be reduced by properly reconstructing the signal. With timestampes, error is reduced down to the intrinsic accuracy of the onboard clock. 
 
 ## Sinewave sampling example
 
-Consider the following continous sinewave with a period of 125 seconds. In the continous time domain, this would look like the following: 
+Consider the following continuous sinewave with a period of 125 seconds. In the continuous time domain, this would look like the following: 
 
 <p align='center'>
 <img src='Images/Int/p1.png'>
@@ -21,7 +21,7 @@ Furthermore, consider the common case where data reception has a 10% chance of f
 <img src='Images/Int/p3.png'>
 </p>
 
-Finally, consider the case where the original samples were timestamped. With a timestamp, one can reconstruct the original signal in an optimal fasion. In matlab, this can be done with the **interp1** command. For example:
+Finally, consider the case where the original samples were timestamped. With a timestamp, one can reconstruct the original signal in an optimal fashion. In matlab, this can be done with the **interp1** command. For example:
 
 ```matlab
 yEstimated = interp1(timeStamps,yValuesRecorded,desiredTimeStamps,'spline');
