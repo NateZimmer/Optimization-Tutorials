@@ -13,5 +13,5 @@ The following is my personal reference repository of math examples and concepts 
 5. [**Gauss Newton**](Pages/GaussNewton.ipynb) 
 6. [**Gradient Descent**](Pages/GradientDescent.md) 
 7. [**NLSQ With Multiple Datasets**](Pages/NonLinearMultipleDataSets.md) 
-
+8. [**Signal Reconstruction by Time Stamp**](Pages/DataSampling.md) 
 
