@@ -9,7 +9,7 @@ Consider the following continuous sinewave with a period of 125 seconds. In the 
 <img src='Images/Int/p1.png'>
 </p>
 
-Now consider a sample rate of 5 seconds but samples are really being collected every 5.5seconds. If this data were to be plotted with the assumption of a 5s sampling interval, here would be the result: 
+Now consider a sample rate of 5 seconds but samples are really being collected every 5.5 seconds. If this data were to be plotted with the assumption of a 5s sampling interval, here would be the result: 
 
 <p align='center'>
 <img src='Images/Int/p2.png'>
