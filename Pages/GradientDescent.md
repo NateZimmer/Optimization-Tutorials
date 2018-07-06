@@ -4,9 +4,9 @@
 
 ### Background: 
 
-Should you have the unfortunate ignorance to have interest in an unstable, suboptimal, and computationally expensive algorithm called gradient descent, then this tutorial is for you. The list of better choices is nearly endless but this primitive algorithm has gained unfortunate popularity due to it being introduced in some popular introductory 'machine learning' courses. What you are probably intrested in is an algorithm called 'Least Squares' but none the less I have introduced that which is most shit, gradient descent, below:  
+Should you have an interest in an unstable and computationally expensive algorithm called ***gradient descent***, then this tutorial is for you. For many optimizaiton/'machine learning' problems, there are better algorithms. What you are probably intrested in is the **[Normal Equation](http://mathworld.wolfram.com/NormalEquation.html)**. However, gradient descent perhaps has merit/use as a stepping stone to algorithms that address large parameter opimization problems(1k,1Mil parameters). Motiviation aside, the material below is my attempt to explain this algorithm.    
 
-### Method:
+#### Notation:
 
 Firstly, the notation to be used is shown below as well as their respective dimensions:  
 
@@ -14,7 +14,7 @@ Firstly, the notation to be used is shown below as well as their respective dime
 <img src ="Images/Gradient/grad1.png">
 </p>
 
-This assumes **_m_** number of data samples has been collected and that the model has **_n_** number of parameters. **_y_** represents the output data that has been measured. **_theta_** is the matrix of model parameters that are to be estimated. **_r_** is residual matrix that is also named the error or the innovation matrix. 
+This assumes **_m_** number of data samples has been collected and that the model has **_n_** number of parameters. **_y_** represents the output data that has been measured. **_theta_** is the matrix of model parameters that are to be estimated. **_r_** is residual matrix and is explained in the following section. 
 
 #### Step 1: Calculate r
 
