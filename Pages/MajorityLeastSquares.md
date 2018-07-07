@@ -1,0 +1,1 @@
+Majority least squares is a simple and robust outlier rejection method for least squares problems. Inevitably in practice, outliers and anomalies exist that corrupt data and the subsequent models. 
