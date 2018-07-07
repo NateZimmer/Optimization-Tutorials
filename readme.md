@@ -14,4 +14,4 @@ The following is my personal reference repository of math examples and concepts 
 6. [**Gradient Descent**](Pages/GradientDescent.md) 
 7. [**NLSQ With Multiple Datasets**](Pages/NonLinearMultipleDataSets.md) 
 8. [**Signal Reconstruction by Time Stamp**](Pages/DataSampling.md) 
-
+9. [**Majority Least Squares**](Pages/MajorityLeastSquares.md) 
