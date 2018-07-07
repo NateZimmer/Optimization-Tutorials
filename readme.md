@@ -15,3 +15,5 @@ The following is my personal reference repository of math examples and concepts 
 7. [**NLSQ With Multiple Datasets**](Pages/NonLinearMultipleDataSets.md) 
 8. [**Signal Reconstruction by Time Stamp**](Pages/DataSampling.md) 
 9. [**Majority Least Squares**](Pages/MajorityLeastSquares.md) 
+
+**Discliamer:** These tutorials may be chalk full of errors and may be utter rubbish. These tutorials represent my limited understanding of these topics and should not be used as any type of a definitive reference.  
