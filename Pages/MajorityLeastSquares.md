@@ -107,7 +107,7 @@ Naturally, NLSQ is ill-suited for biased outliers where as MNLSQ is robust again
 
 #### MNLSQ.m
 
-```
+```matlab
 % Majority Non-linear Least Squares |  Nathan Zimmerman 9/16/2018
 % theta --> Output Parameters 
 % r --> residual function 
