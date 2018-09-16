@@ -85,7 +85,7 @@ Naturally, improvements could be made to the above but this hopefully communicat
 
 #### Adaption for Majority Non-linear Least Squares 
 
-With relatively little effort, the above code can be adapted for Majority Non-linear Least Squares. NLSQ is already required to implement MLS. Instead of directly opperating on a provided **J**, the jacobian matrix can be estimated from an arbitrary residual function. In this case, our non-linear optimization problem can be written as a residual function and passed to the optimizer. 
+With relatively little effort, the above code can be adapted for Majority Non-linear Least Squares. NLSQ is already required to implement MLS. Instead of directly operating on a provided **J**, the Jacobian matrix can be estimated from an arbitrary residual function. In this case, our non-linear optimization problem can be written as a residual function and passed to the optimizer. 
 
 ##### Residual Function format:
 
@@ -93,14 +93,17 @@ With relatively little effort, the above code can be adapted for Majority Non-li
 <i>r(x,y,θ) = y - function(x,θ)</i> 
 </p>
 
-Where the ***function*** is whatever arbitrary function which is to be optimized, where ***θ*** are the optimization paramters, where ***x*** are the function inputs, and where ***y*** are the observed maeasurements.   
+Where the ***function*** is whatever arbitrary function which is to be optimized, where ***θ*** are the optimization parameters, where ***x*** are the function inputs, and where ***y*** are the observed measurements.   
 
-The following is a demonstration of MNLSQ on a cosine of unkown amplitude, phase, and offset where a biased signal is injected on top of the desired signal. Naturally, NLSQ is illsuited for a biased signal where as MNLSQ is robust against biased outliers assuming it does not represent the majority of the data. 
+The following is a demonstration of MNLSQ on a cosine of unknown amplitude, phase, and offset where a biased signal is injected on top of the desired signal.
 
 
 <p align=center>
 <img src="Images/MLS/nlmlsq1.png"></img>
 </p>
+
+Naturally, NLSQ is ill-suited for biased outliers where as MNLSQ is robust against biased outliers assuming it does not represent the majority of the data. 
+
 
 #### MNLSQ.m
 
