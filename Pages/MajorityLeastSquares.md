@@ -1,4 +1,4 @@
-# Majority Least Squares 
+# Majority Non-linear Least Squares 
 
 <p align=center>
 <img src="Images/MLS/MLS1.png"></img>
@@ -46,6 +46,8 @@ The following will overview how to implement majority least squares. Majority le
 
 The following is matlab code which implements the above concepts. 
 
+#### MLS.m
+
 ```matlab
 % Majority Least Squares |  Nathan Zimmerman 7/7/2018
 % theta --> Output Parameters 
@@ -80,3 +82,60 @@ end
 ```
 
 Naturally, improvements could be made to the above but this hopefully communicates the basic idea of the algorithm. In my humble opinion, its quite simple to implement while potentially being more effective than many robust algorithms. It has the capacity to completely reject multi-modal problems again assuming the majority of data is 'good'. Biggest hit to the efficiency of this algorithm is in the sorting of the residual vector. In most cases, such a sort would not be castrophic. 
+
+#### Adaption for Majority Non-linear Least Squares 
+
+With relatively little effort, the above code can be adapted for Majority Non-linear Least Squares. NLSQ is already required to implement MLS. Instead of directly opperating on a provided **J**, the jacobian matrix can be estimated from an arbitrary residual function. In this case, our non-linear optimization problem can be written as a residual function and passed to the optimizer. 
+
+##### Residual Function format:
+
+<p align="center">
+<i>r(x,y,θ) = y - function(x,θ)</i> 
+</p>
+
+Where the ***function*** is whatever arbitrary function which is to be optimized, where ***θ*** are the optimization paramters, where ***x*** are the function inputs, and where ***y*** are the observed maeasurements.   
+
+The following is a demonstration of MNLSQ on a cosine of unkown amplitude, phase, and offset where a biased signal is injected on top of the desired signal. Naturally, NLSQ is illsuited for a biased signal where as MNLSQ is robust against biased outliers assuming it does not represent the majority of the data. 
+
+
+<p align=center>
+<img src="Images/MLS/nlmlsq1.png"></img>
+</p>
+
+#### MNLSQ.m
+
+```
+% Majority Non-linear Least Squares |  Nathan Zimmerman 9/16/2018
+% theta --> Output Parameters 
+% r --> residual function 
+% x --> Input array
+% y --> Data Observations 
+% dp --> Data Percentage to use. Recommended: 0.7 (70%)
+function theta = MNLSQ(x,y,fnc,params,dp)
+
+alpha = 1;
+theta = params;
+dn = floor(length(x)*dp);
+rOld = fnc(x,y,theta);
+rOldS = sort(rOld.^2);
+rReduce = rOld(rOld.^2<rOldS(dn));
+oldCost = norm(rReduce);
+
+for i =1:100;
+    r = fnc(x,y,theta);
+    rSort = sort(r.^2);
+    W = diag(r.^2<rSort(dn)); 
+    J = W*jacY(x,y,fnc,theta);
+    p = -pinv(J'*J + alpha*eye(length(params)))*J'*r;
+    newCost = norm(W*fnc(x,y,theta+p));
+    if(newCost<oldCost)
+        theta = theta+p;  
+        oldCost = newCost;
+        alpha =0.1*alpha;
+    else
+        alpha = 10*alpha;
+    end
+end
+end
+
+```
