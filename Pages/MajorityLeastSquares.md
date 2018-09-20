@@ -4,7 +4,7 @@
 <img src="Images/MLS/MLS1.png"></img>
 </p>
 
-Majority least squares is a simple and robust outlier rejection method for least squares problems. Inevitably in practice, outliers and anomalies exist that corrupt data and the subsequent models. It follows that intrinsic outlier rejection is recommended  for unsupervised learning systems to function in practice. Majority least squares achieves this by looking at the majority of data as opposed to data in its eternity. This is advantageous over other robust techniques since no weighting is given to outliers. However, it operates on the following assumption: 
+Majority least squares is a simple and robust outlier rejection method for least squares problems. Inevitably in practice, outliers and anomalies exist that corrupt data and the subsequent models. It follows that intrinsic outlier rejection is recommended  for unsupervised learning systems to function in practice. Majority least squares achieves this by looking at the majority of data as opposed to data in its entirety. This is advantageous over other robust techniques since no weighting is given to outliers. However, it operates on the following assumption: 
 
 - The majority of data is 'good' data with a normal/uniform distribution of error.
 
@@ -81,9 +81,9 @@ end
 end
 ```
 
-Naturally, improvements could be made to the above but this hopefully communicates the basic idea of the algorithm. In my humble opinion, its quite simple to implement while potentially being more effective than many robust algorithms. It has the capacity to completely reject multi-modal problems again assuming the majority of data is 'good'. Biggest hit to the efficiency of this algorithm is in the sorting of the residual vector. In most cases, such a sort would not be castrophic. 
+Naturally, improvements could be made to the above but this hopefully communicates the basic idea of the algorithm. In my humble opinion, its quite simple to implement while potentially being more effective than many robust algorithms. It has the capacity to completely reject multi-modal problems again assuming the majority of data is 'good'. Biggest hit to the efficiency of this algorithm is in the sorting of the residual vector. In most cases, such a sort would not be catastrophic. 
 
-#### Adaption for Majority Non-linear Least Squares 
+#### Adaptation for Majority Non-linear Least Squares 
 
 With relatively little effort, the above code can be adapted for Majority Non-linear Least Squares. NLSQ is already required to implement MLS. Instead of directly operating on a provided **J**, the Jacobian matrix can be estimated from an arbitrary residual function. In this case, our non-linear optimization problem can be written as a residual function and passed to the optimizer. 
 
