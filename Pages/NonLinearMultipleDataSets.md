@@ -53,7 +53,7 @@ end
 end
 ```
 
-**Alter lmaB Function:** Finally, modify the vanilla Levenberg Marquardt function to use both the modified r & J functions. 
+**Alter lma Function:** Finally, modify the vanilla Levenberg Marquardt function to use both the modified r & J functions. 
 
 ```matlab 
 function theta = lmaB(v,fnc,params)
