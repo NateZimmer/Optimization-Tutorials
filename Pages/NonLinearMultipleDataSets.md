@@ -83,10 +83,12 @@ We now have a non-linear least squares solver that can utilize multiple data set
 ```matlab
 % NZ Test lma batch
 clc
-a=2;
-b=5;
+a=2; % actual slope
+b=5; % actual offset 
 thetaActual = [b;a];
-t = (-10:1:10)';
+
+% Generate sample data 
+t = (-10:1:10)'; 
 t2 = (-10:0.1:10)';
 t3 = (-10:0.1:10)';
 
@@ -94,19 +96,27 @@ y = t.*a+b+randn(length(t),1)*20;
 y2 = t2.*a+b+randn(length(t2),1)*10;
 y3 = t3.*a+b+randn(length(t3),1)*5;
 
-
+% Create Residual Function 
 testFnc = @(xx,yy,theta) yy - (xx*theta(2)+theta(1)); 
 
+% Create 'cell' vector of data
 v = {t,y;t2,y2;t3,y3};
+
+% Create initial guess 
 theta = [0;1];
 
+% Input vector of data, residual function, and initial guess into lmaB
 theta = lmaB(v,testFnc,theta);
+
+% For reference, perform linear calculation on 1 dataset 
 J  = [t.^0,t.^1];
 thetaLinear = pinv((J') * J)*(J')*y;
 
+% Calculate Errors 
 rLinear = norm(J*thetaActual - J*thetaLinear);
 rNL = norm(J*thetaActual - J*theta);
 
+% Make a pretty plot 
 fig1 = figure(1);
 clf(fig1)
 hold on 
@@ -120,5 +130,6 @@ legend('Data Set 1','Data Set 2','Data Set 3','Non-linear batch','LSQ','Actual')
 grid on
 title(['Error 1 Set: ',num2str(rLinear),', Error Multiple Sets: ',num2str(rNL)])
 disp(datetime)
+
 ```
 As observed and expected, the error is less when multiple data is combined versus a single data set. 
