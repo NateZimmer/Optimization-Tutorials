@@ -82,7 +82,9 @@ end
 
 ```
 
-We now have a non-linear least squares solver that can utilize multiple data sets. As a crappy example, lets identify a line: 
+# Line Optimization example with multiple datasets 
+
+**Description:** Consider an example where you with to optimize the offset and slope of a line model from multiple datasets. Now, this is a simple example that doesn't *require* NLSQ but none the less, NLSQ can be used. The following is example code in which 3 lines are simulated with varying levels of noise and `lmaB` is called to find the optimal ***theta*** values given the data. 
 
 <p align='center'><img src='Images/lmaB1.png'</p>
 
