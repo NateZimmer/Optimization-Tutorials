@@ -12,7 +12,13 @@ Consider a residual function of the following:
 function r = rFnc(x,y,theta)
 ```
 
-Now consider a function that concatenates the various residual vectors into one larger residual array: 
+In the above function, ***x*** is your input data, ***y*** are your output measurements, and theta are the parameters you wish to optimize. Each of these should be in a column vector form. This residual function can be anything and it is what you are trying to opimize against. For example, one can do an anonomous inline residual function for a line (y= m*x + b) such as the following: 
+
+```matlab
+residualFnc = @(x,y,theta) y - (x*theta(2)+theta(1)); % Experimental data minus the equation of a line
+```
+
+Now consider a function that concatenates the various residual vectors into one larger residual array for multiple datasets: 
 
 ```matlab
 function r =subR(v,rFnc,theta)
