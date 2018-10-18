@@ -18,7 +18,7 @@ In the above function, ***x*** is your input data, ***y*** are your output measu
 residualFnc = @(x,y,theta) y - (x*theta(2)+theta(1)); % Experimental data minus the equation of a line
 ```
 
-Now consider a function that concatenates the various residual vectors into one larger residual array for multiple datasets: 
+**Create a batch residual function:** Now consider a function that concatenates the various residual vectors into one larger residual array for multiple datasets: 
 
 ```matlab
 function r =subR(v,rFnc,theta)
@@ -35,7 +35,7 @@ function r =subR(v,rFnc,theta)
     end
 end
 ```
-Next, modify a finite difference Jacobian for the modified residual function.
+**Alter Jacobian:** Next, modify a finite difference Jacobian for the modified residual function.
 
 ```matlab
 function J=jacB(v,fnc,params)
@@ -53,7 +53,7 @@ end
 end
 ```
 
-Finally, modify the vanilla Levenberg Marquardt function to use both the modified r & J functions. 
+**Alter lmaB Function:** Finally, modify the vanilla Levenberg Marquardt function to use both the modified r & J functions. 
 
 ```matlab 
 function theta = lmaB(v,fnc,params)
@@ -82,12 +82,14 @@ end
 
 ```
 
-# Line Optimization example with multiple datasets 
+## Line Optimization example with multiple datasets 
 
 **Description:** Consider an example where you with to optimize the offset and slope of a line model from multiple datasets. Now, this is a simple example that doesn't *require* NLSQ but none the less, NLSQ can be used. The following is example code in which 3 lines are simulated with varying levels of noise and `lmaB` is called to find the optimal ***theta*** values given the data. 
 
 <p align='center'><img src='Images/lmaB1.png'</p>
 
+**Example code:** Note, to get this to run you will have to copy the above code and save the individual functions  `subR.m` , `jacB.m`, and `lmaB.m`.
+ 
 ```matlab
 
 % NZ Test lma batch
