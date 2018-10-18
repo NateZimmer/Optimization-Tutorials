@@ -81,6 +81,7 @@ We now have a non-linear least squares solver that can utilize multiple data set
 <p align='center'><img src='Images/lmaB1.png'</p>
 
 ```matlab
+
 % NZ Test lma batch
 clc
 a=2; % actual slope
@@ -96,7 +97,7 @@ y = t.*a+b+randn(length(t),1)*20;
 y2 = t2.*a+b+randn(length(t2),1)*10;
 y3 = t3.*a+b+randn(length(t3),1)*5;
 
-% Create Residual Function 
+% Create Residual Function: r(x,y,theta) = y - f(x,theta)
 testFnc = @(xx,yy,theta) yy - (xx*theta(2)+theta(1)); 
 
 % Create 'cell' vector of data
