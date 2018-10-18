@@ -4,7 +4,7 @@
 
 ## Introduction: 
 
-Often one may wish to find optimal parameters given multiple data sets. Depending upon the residual function, one may wish to solve the data sets independently and avoid direct concatenation of the data. Provided one understands non-linear least squares it should be fairly intuitive how one combines multiple data sets. Simply append the residual array with the residual output of each data set. 
+Often one may wish to find optimal parameters given multiple data sets. Depending upon the residual function, one may wish to solve the data sets independently and avoid direct concatenation of the data. Provided one understands **[non-linear least squares](https://github.com/NateZimmer/Optimization-Tutorials/blob/master/Pages/LevenbergMarquardt.ipynb)** it should be fairly intuitive how one combines multiple data sets. Simply append the residual array with the residual output of each data set. 
 
 Consider a residual function of the following: 
 
