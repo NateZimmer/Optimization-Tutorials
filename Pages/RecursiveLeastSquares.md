@@ -59,7 +59,7 @@ I have not explained anything in detail yet. Consequently, there are some questi
 
 
 
-### The forgetting factor:
+## The forgetting factor:
 
 The forgetting factor forgets data over time. This factor is ideal for systems that change over time. Consider the following system that changes at time -1 and 0. 
 
@@ -96,6 +96,24 @@ Consequently, this parameter is hard to choose optimally without manually tunnin
 ## Initializing the Covariance Matrix P
 
 The covariance matrix demonstrates how your samples change with respect to each other. This matrix needs an initial value. Generally the identity matrix times a scalar is chosen. A large scalar allows quick change but produces a lot of initial noise when selecting a parameter. A lower scalar will more gradually move away from an initial guess at the expense of potentially slower convergence. 
+
+
+## Is RLS Equivalent to Batch LSQ?
+
+One might question whether or not RLS is equivalent to batch LSQ. To test this, consider **[example 1](#example-1-identify-quadratic-polynomial-using-rls)** except where one re-calculates the batch parameters each step given all history up to that point in time. 
+
+<p align="center">
+<img src ="Images/RLS/rls_lsq.png">
+</p>
+
+As seen above, the parameters calculated at each step are nearly identical for RLS and batch LSQ. Reference code for this plot is provided **[here](#example-code-rls-vs-lsq)**. 
+
+**Note differences between RLS & LSQ can be observed if:**
+
+- Data consists of a small number of samples ~<20
+- If **P** is initialized to a small magnitude, it will take more samples for RLS to converge to the LSQ result.
+- If forgetting factor, **λ**, is not equal to 1. 
+
 
 
 ## Example 1 Code: 
@@ -151,5 +169,29 @@ grid on
 set(gca,'FontSize',10,'FontWeight','bold');
 set(gcf,'Units','Pixels');
 ```
+
+### Example code: RLS vs LSQ
+
+The following demonstrates the code modification in order to perform a RLS and batch LSQ calculation each step.
+
+```matlab
+for i = 1:length(x)
+    [thetaLong(:,i+1), P] = RLS_Nate(J(i,:),yMeasured(i),thetaLong(:,i),lambda,P); % RLS
+    thetaBatch(:,i) = pinv((J(1:i,:)')*J(1:i,:))*(J(1:i,:)')*yMeasured(1:i,1); % LSQ
+end
+
+fig2 = figure(2);
+clf(fig2);
+hold on 
+title('RLS vs LSQ Identifying: -x^2 -x + 4')
+plot(thetaLong(1,2:end))
+plot(thetaLong(2,2:end))
+plot(thetaLong(3,2:end))
+plot(thetaBatch(1,:),'--')
+plot(thetaBatch(2,:),'--')
+plot(thetaBatch(3,:),'--')
+legend('x^2 RLS','x RLS','1 RLS','x^2 LSQ','x LSQ','1 LSQ')
+```
+
 
 <p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
