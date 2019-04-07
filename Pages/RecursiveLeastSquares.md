@@ -103,7 +103,7 @@ The covariance matrix demonstrates how your samples change with respect to each 
 One might question whether or not RLS is equivalent to batch LSQ. To test this, consider **[example 1](#example-1-identify-quadratic-polynomial-using-rls)** except where one re-calculates the batch parameters each step given all history up to that point in time. 
 
 <p align="center">
-<img src ="Images/RLS/rls_lsq.png">
+<img src ="Images/RLS/rls_lsq.svg">
 </p>
 
 As seen above, the parameters calculated at each step are nearly identical for RLS and batch LSQ. Reference code for this plot is provided **[here](#example-code-rls-vs-lsq)**. 
