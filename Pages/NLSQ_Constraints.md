@@ -50,7 +50,7 @@ end
 end
 ```
 
-This function is based on steps "***p***" which are damped newton steps where "***α***" is the damping parameter. This parameter is heuristically updated based upon the performance/improvement of the new step. Note that ***J*** is the **[jacobian](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant)** and it can be analytically calculated or calculated via finite differences as shown below: 
+This function is based on steps ***p*** which are damped newton steps where ***α*** is the damping parameter. This parameter is heuristically updated based upon the performance/improvement of the new step. Note that ***J*** is the **[jacobian](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant)** and it can be analytically calculated or calculated via finite differences as shown below: 
 
 ```matlab
 function J=Jf(fnc,params)
@@ -137,6 +137,8 @@ The following code is an example implementation where the true slope is 2, the t
     <img src='Images/nlsq_c/box_constraint.svg' >
 </p>
 
+Note you will need the functions **lma.m** and **Jf.m** code provided near the start.
+
 ```matlab
 % NZ Wrapping funciton demo 
 clc; clear all
@@ -198,7 +200,7 @@ if(newCost<oldCost && norm(imag(rNew))<1e-5) % Added to handle ln barrier functi
 
 #### Example for Barrier Method Inequality Constraints:
 
-Consider the prior simple line example except where we implement a constraint 
+Consider the prior simple line example except where we implement a constraint that slope ***m*** must be less than the offset ***b***. 
 
 
 <p align ='center'>
@@ -218,7 +220,7 @@ The white box represents the constraint, and the Z axis represents cost. Given t
     <img src='Images/nlsq_c/3d_ieq3.svg'  >
 </p>
 
-The following is the example code which produced these plots. 
+The following is the example code which produced these plots. Note you will need the functions **lma.m** and **Jf.m** code provided near the start.
 
 ```matlab
 % NZ InEquality Constraints 
