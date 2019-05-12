@@ -10,7 +10,7 @@
 NLSQ attempts to minimize squared error of an objective function. 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/obj_1.png' alt="\min_{\theta}  \quad ||r(\theta)|| ">
+    <img src='Images/nlsq_c/obj_1.svg' title="\min_{\theta}  \quad ||r(\theta)|| ">
 <p>
 
 Where: 
@@ -76,7 +76,7 @@ While finite differences for jacobian estimation is not computationally efficien
 Box constraints are a commonly needed constraint where ***θ*** can only take certain values. For example, if ***θ*** represented a duty cycle, it could only be between 0 and 1. The problem is annotated in literature similar to the following: 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/obj_box.png' alt="\min_{\theta}  \quad ||r(\theta)|| " alt="
+    <img src='Images/nlsq_c/obj_box.svg' title="
 \min  \quad ||r(\theta)|| \\
 & s.t. \\
 &  \theta : { l.b.  <  \theta < u.b. }">
@@ -89,19 +89,19 @@ Where ***l.b*** and ***u.b.*** are fixed numerical lower and upper bounds on  **
 A "wrapping function" wraps variables in an already bounded function. Note this is my own name and this technique is not in widespread usage to my knowledge but it is simple. Consider the sigmoid function often used neural networks to produce a value between 0 and 1. 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/sig.png' alt="\min_{\theta}  \quad ||r(\theta)|| " alt="f(x) = \frac{1}{1 + e^{-x}}">
+    <img src='Images/nlsq_c/sig.svg' title="f(x) = \frac{1}{1 + e^{-x}}">
 </p>
 
 Which produces a plot such as this: 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/sig_plot.png' alt="https://en.wikipedia.org/wiki/Sigmoid_function#/media/File:Logistic-curve.svg">
+    <img src='Images/nlsq_c/sig_plot.png' title="https://en.wikipedia.org/wiki/Sigmoid_function#/media/File:Logistic-curve.svg">
 </p>
 
 As ***x*** goes off to -infinity or +infinity, the output converges to 0 or 1 which is an example of an unbounded input producing a bounded output. One can modify this to accommodate arbitrary upper and lower bounds as shown below: 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/sig_bound.png' alt="bound(\theta,lb,ub) = (\frac{1}{1 + e^{-\theta}})\cdot (ub - lb) + lb ">
+    <img src='Images/nlsq_c/sig_bound.svg' title="bound(\theta,lb,ub) = (\frac{1}{1 + e^{-\theta}})\cdot (ub - lb) + lb ">
 </p>
 
 
@@ -110,19 +110,19 @@ As ***x*** goes off to -infinity or +infinity, the output converges to 0 or 1 wh
 Consider a line as an model function with unknown slope and offset. 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/line.png' alt="f(\theta,x) = \theta_0 x + \theta_1">
+    <img src='Images/nlsq_c/line.svg' title="f(\theta,x) = \theta_0 x + \theta_1">
 </p>
 
 Now say one wishes to bound the offset between 0 and 5, one would simply modify model function as follows: 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/line_bound.png' alt="f(\theta,x) = \theta_0 x + bound(\theta_1,0,5)">
+    <img src='Images/nlsq_c/line_bound.svg' title="f(\theta,x) = \theta_0 x + bound(\theta_1,0,5)">
 </p>
 
 The objective function is then: 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/r_line.png' alt="f(\theta,x) = \theta_0 x + bound(\theta_1,0,5)">
+    <img src='Images/nlsq_c/r_line.svg' title="r(\theta) = data - f(\theta,x)">
 </p>
 
 Assuming that ones data and x are externally defined.
@@ -175,7 +175,10 @@ While this is a very simple example that doesn't require the non-linear aspect o
 Inequality constraints is more broad definition of box constraints and reflect any inequality involving the parameters. Unfortunately, the prior wrapping function method does not work here since multiple parameters may be constrained against each other. The problem statement literature is often annotated similarly to the following: 
 
 <p align ='center'>
-    <img src='Images/nlsq_c/obj_inequality.png' >
+    <img src='Images/nlsq_c/obj_inequality.svg' title='\\
+& \min  \quad ||r(\theta)|| \\
+& s.t. \\
+&  \theta : g(\theta) > 0' >
 </p>
 
 Where ***g(θ)*** is a function that implements an inequality constraint whose output must be greater than 0. While this may seem limiting, one generally can easily rewrite inequalities to be in this form. For example, consider ***a+b>5***. Naturally this can be rewritten as ***a+b-5>0***. The reason for this form is it allows for a simple implementation of a barrier function within the objective function. 
@@ -295,7 +298,7 @@ Using this barrier method, one can implement far more intricate constraints thou
 
 ## References: 
 
-Latex images generated from: http://www.sciweavers.org/free-online-latex-equation-editor 
+Latex images generated from: https://www.codecogs.com/latex/eqneditor.php
 
 
 <p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
