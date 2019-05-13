@@ -1,6 +1,6 @@
 <p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
 
-# NLSQ with Constraints 
+# NLSQ with constraints: 
 
 **Introduction:** While standard Non-Linear Least Squares(NLSQ) is an unconstrained optimization technique, many real world problems often are subject to constraints. For example, physical systems such as vehicles, robots, actuators, and sensors often have physical limits. To address this, numerous algorithms and techniques have been developed to implement various constraints. This write-up explores some basic NLSQ constraint techniques. While these methods are neither optimally efficient nor optimally robust, they are a starting point for intuition regarding constraint implementation.   
 
@@ -164,7 +164,8 @@ grid on
 set(gca,'FontSize',10,'FontWeight','bold');
 set(gcf,'Units','Pixels');
 legend('Data', 'Constrained Model','LSQ','location','se')
-title(['Box Constraint NLSQ: f(\theta,t) = \theta_0 * t + \theta_1','\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']',', Constraint:  \theta_1: 5<\theta_1<\infty'])
+title(['min r(\theta)^2 = (data - f(\theta,x))^2 , f(\theta,x) = \theta_0 * x + \theta_1','\newlines.t:  \theta_1: 5 < \theta_1 < \infty\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']'])
+xlabel('x')
 print(gcf,'box_constraint','-dsvg','-r0');
 ```
 
@@ -220,14 +221,14 @@ As observed, the solution produced a result. The result satisfies the constraint
 The white box represents the constraint, and the Z axis represents cost. Given the nature of the model, the cost plot is globally convex with an optimal solution. However, the constraint blocks the optimal solution from being achieved. Consequently, the optimal lies along the constraint. Here is another view of the plot except in 2d.
 
 <p align ='center'>
-    <img src='Images/nlsq_c/3d_ieq3.svg'  >
+    <img src='Images/nlsq_c/3d_ieq3.svg' >
 </p>
 
 The following is the example code which produced these plots. Note you will need the functions **lma.m** and **Jf.m** code provided near the start.
 
 ```matlab
 % NZ InEquality Constraints 
-clc; close all; clear all
+clc; clear all
 m = 2; b=-2; e= 2;
 t = (0 : 0.5 : 10)'; 
 yM = m .* t + b + e .* randn(size(t));
@@ -248,13 +249,14 @@ scatter(t,yM);
 plot(t,yH)
 plot(t,yLSQ,'--','color','black')
 grid on 
-title(['Inequality Constraint NLSQ: f(\theta,t) = \theta_0 * t + \theta_1','\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']',', Constraint:  \theta: \theta_0<\theta_1'])
+title(['min r(\theta)^2 = (data - f(\theta,x))^2 , f(\theta,x) = \theta_0 * x + \theta_1','\newlines.t:  \theta: \theta_0<\theta_1\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']'])
 legend('Data','Model','LSQ','location','se')
+xlabel('x')
 
 %% 3d Plot Data
 
-yMM = -5:0.01:5;
-xMM = -5:0.01:5;
+yMM = -5:0.1:5;
+xMM = -5:0.1:5;
 Z = zeros(length(yMM),length(xMM));
 Zc1 = 0 .* Z;
 for i = 1:length(yMM)
@@ -280,25 +282,31 @@ M(4,:) = [-5,-5,200];
 M = M';
 
 patch(M(1,:),M(2,:),M(3,:),'w','FaceAlpha',0.7);
-xlabel('m');
-ylabel('b');
+xlabel('\theta_0');
+ylabel('\theta_1');
 scatter3(thetaLMA(1),thetaLMA(2),norm(rFncs(thetaLMA))+3,'r','filled');
 scatter3(thetaLSQ(1),thetaLSQ(2),norm(yM - (t*thetaLSQ(1) + thetaLSQ(2)))+3,'g','filled');
 view(25.2,55.6);
 
 fig3 = copyobj(gcf,0);
 view(2);
-title(['Inequality Constraint NLSQ: f(\theta,t) = \theta_0 * t + \theta_1','\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']',', Constraint:  \theta: \theta_0<\theta_1'])
+title(['min r(\theta)^2 = (data - f(\theta,x))^2 , f(\theta,x) = \theta_0 * x + \theta_1','\newlines.t:  \theta: \theta_0<\theta_1\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']'])
 legend('Cost','Boundary','Constrained Optimal','Optimal','location','NW')
 
 ```
 
-Using this barrier method, one can implement far more intricate constraints though again, this basic example is designed to illustrate the concept. 
+In summary, the ***ln*** barrier function provides a flexible method for implementing a wide range of non-linear constraints. These barrier functions can be used in a standard NLSQ optimizer by altering the objective function. While this writeup demonstrates NLSQ constraint methods, significant academic effort not shown here is focused on: 
+- Intelligent step calculations
+- Adaptive barrier scaling 
+- Reducing computation time / complexity 
+- Determining algorithm convergence  
+- Increasing robustness 
 
+Often papers present methods far more complicated then what was demonstrated here to address some of the above factors. 
 
 ## References: 
 
-Latex images generated from: https://www.codecogs.com/latex/eqneditor.php
+Latex images generated from: [https://www.codecogs.com/latex/eqneditor.php](https://www.codecogs.com/latex/eqneditor.php)
 
 
 <p align="center"> <a href="../readme.md"><b>Back To Index</b></a></p>
