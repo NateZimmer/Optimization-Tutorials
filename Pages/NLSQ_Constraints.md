@@ -184,7 +184,7 @@ Inequality constraints is more broad definition of box constraints and reflect a
 
 Where ***g(θ)*** is a function that implements an inequality constraint whose output must be greater than 0. While this may seem limiting, one generally can easily rewrite inequalities to be in this form. For example, consider ***a+b>5***. Naturally this can be rewritten as ***a+b-5>0***. The reason for this form is it allows for a simple implementation of a barrier function within the objective function. 
 
-### Interior Point Barrier Method for Inequality Constraints:
+## Interior Point Barrier Method for Inequality Constraints:
 
 Interior point **[Barrier Method](https://optimization.mccormick.northwestern.edu/index.php/Interior-point_method_for_LP)** is an interior point method for solving non convex optimization problems where barrier functions are employed to implement constraints. While this method is more flexible than the wrapping functions, one has to be careful because the barrier functions are often non-continuos functions which can cause issues with some optimizer. The consider the function ***f(x) = -λ ln(x)*** where λ is near 0 and ***ln*** is the natural log. The plot of this function is as follows: 
 
@@ -295,14 +295,136 @@ legend('Cost','Boundary','Constrained Optimal','Optimal','location','NW')
 
 ```
 
-In summary, the ***ln*** barrier function provides a flexible method for implementing a wide range of non-linear constraints. These barrier functions can be used in a standard NLSQ optimizer by altering the objective function. While this writeup demonstrates NLSQ constraint methods, significant academic effort not shown here is focused on: 
+In summary, the ***ln*** barrier function provides a flexible method for implementing a wide range of non-linear constraints. These barrier functions can be used in a standard NLSQ optimizer by altering the objective function.
+
+
+## Equality Constraints: 
+
+Equality constraints are one of the final common constraints of NLP. In the nonlinear sense, they are where a function acting on the parameters must equal a condition. In literature the problem may be represented similar to the following: 
+
+<p align ='center'>
+    <img src='Images/nlsq_c/obj_eq.svg' title='\\
+& \min  \quad ||r(\theta)|| \\
+& s.t. \\
+&  \theta : g(\theta) > 0 \ ; \ h(\theta)=0
+' >
+</p>
+
+ As stated previously, there are many methods to achieve this but one example would be to similarly adapt objective function to implement this constraint. This can be done by adding a squared error term in the objective function with a weighing factor as shown below: 
+
+<p align ='center'>
+    <img src='Images/nlsq_c/eq_obj_r.svg' title='min_{L2} : r(\theta) - \lambda \cdot ln(g(\theta)) + \phi \cdot h(\theta)^2' >
+</p>
+
+A non-flexible non-scalable solution would be to hardcode λ and ϕ to small and large values respectively . Part of the challenge is while the barrier function enforces the inequality constraints, the squared error term does not enforce the equality constraints so ϕ must be sufficiently large to ensure they are realistically met. 
+
+### Equality constraint example: 
+
+Consider the prior inequality constraint example except with an additional equality constraint where θ_0 + θ_1 = 1. 
+
+<p align ='center'>
+    <img src='Images/nlsq_c/eqConstraint.svg'>
+</p>
+
+<p align ='center'>
+    <img src='Images/nlsq_c/eqConstraint3d.svg'>
+</p>
+
+
+
+```matlab
+% NZ InEquality Constraints 
+clc; clear all; close all
+m = 2; b=-2; e= 2;
+t = (0 : 0.5 : 10)'; 
+yM = m .* t + b + e .* randn(size(t));
+rFncs = @(T) yM - (T(1)*t + T(2)) + - 0.001*log(T(2)-T(1)) + 1e9*(T(2)+T(1)-1).^2 ; 
+thetaI = [-5;5];
+thetaLMA = lma(rFncs,thetaI,500);
+thetaLMA = real(thetaLMA);
+J = [t,t.*0+1];
+yH = J*thetaLMA; % model output
+thetaLSQ = pinv(J'*J)*J'*yM;
+yLSQ = J*thetaLSQ;
+
+%% Plot fig 1 
+
+fig1 = figure(1);
+clf(fig1);
+hold on
+scatter(t,yM);
+plot(t,yH)
+plot(t,yLSQ,'--','color','black')
+grid on 
+
+titleStr = ['min r(\theta)^2 = (data - f(\theta,x))^2 , f(\theta,x) = \theta_0 * x + \theta_1','\newlines.t:  \theta: \theta_0<\theta_1  ,  \theta_0 + \theta_1 = 1\newline\theta_{calc} = [',num2str(thetaLMA(1)),',',num2str(thetaLMA(2)),']'];
+title(titleStr)
+legend('Data','Model','LSQ','location','se')
+xlabel('x')
+
+%% 3d Plot Data
+
+yMM = -5:0.1:5;
+xMM = -5:0.1:5;
+Z = zeros(length(yMM),length(xMM));
+Zc1 = 0 .* Z;
+for i = 1:length(yMM)
+   for j = 1:length(xMM)
+       Z(i,j) = norm(yM - (xMM(j)*t + yMM(i)));
+       Zc1(i,j) = 5;
+   end
+end
+
+%% Plot fig 2 
+
+fig2 = figure(2);
+clf(fig2);
+surf(yMM,xMM,Z)
+shading interp
+hold on 
+
+M = zeros(4,3);
+M(1,:) = [-5,-5,0];
+M(2,:) = [5,5,0];
+M(3,:) = [5,5,200];
+M(4,:) = [-5,-5,200];
+M = M';
+
+patch(M(1,:),M(2,:),M(3,:),'w','FaceAlpha',0.7);
+
+M = zeros(4,3);
+M(1,:) = [5,-4,0];
+M(2,:) = [-4,5,0];
+M(3,:) = [-4,5,200];
+M(4,:) = [5,-4,200];
+M = M';
+
+patch(M(1,:),M(2,:),M(3,:),'r','FaceAlpha',0.7,'EdgeColor','red');
+
+
+xlabel('\theta_0');
+ylabel('\theta_1');
+z = norm(rFncs(thetaLMA))+20;
+scatter3(thetaLMA(1),thetaLMA(2),z,'y','filled');
+scatter3(thetaLSQ(1),thetaLSQ(2),norm(yM - (t*thetaLSQ(1) + thetaLSQ(2)))+3,'g','filled');
+view(25.2,55.6);
+
+fig3 = copyobj(gcf,0);
+view(2);
+title(titleStr)
+legend('Cost','Inequality Bound','Equality Bound','Optimal','LSQ','location','NW')
+```
+
+## Conclusion
+
+ While this writeup demonstrates NLSQ constraint methods, significant academic effort not shown here is focused on: 
 - Intelligent step calculations
 - Adaptive barrier scaling 
 - Reducing computation time / complexity 
 - Determining algorithm convergence  
 - Increasing robustness 
 
-Often papers present methods far more complicated then what was demonstrated here to address some of the above factors. 
+Often papers present methods are often more complicated then what was demonstrated here to address some of the above factors. 
 
 ## References: 
 
